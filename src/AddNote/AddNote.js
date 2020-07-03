@@ -30,18 +30,15 @@ export default class AddNote extends React.Component {
         
         this.props.addNote ( formValuesArray );
         
-        //browserHistory.push ( `/folder/${ form.get ( 'note-folder-select' ) }` );
-        
-        //window.location = `/folder/${ form.get ( 'note-folder-select' ) }`;
+        let selectVal = form.get ( 'note-folder-select' )
+
+        this.props.routerProps.history.push ( `/folder/${ selectVal }` );
 
     }
 
-    folderHighlight ( selectValue ) {
+    selectFolderHighlight ( selectValue ) {
 
-        //console.log ( selectValue );
-
-        // How can I pass a value to Sidebar.js 
-        // in order to highlight a button in the sidebar ?
+        this.props.folderToHighlight ( selectValue );
 
     }
 
@@ -73,7 +70,7 @@ export default class AddNote extends React.Component {
 
                         <label htmlFor = 'note-folder-select'>Select a folder</label>
 
-                        <select id = 'note-folder-select' name = 'note-folder-select' required onChange = { ( e ) => this.folderHighlight ( e.target.value ) }>
+                        <select id = 'note-folder-select' name = 'note-folder-select' required onChange = { ( e ) => this.selectFolderHighlight ( e.target.value ) }>
 
                                     <option id = 'default'>Choose a folder</option>
 

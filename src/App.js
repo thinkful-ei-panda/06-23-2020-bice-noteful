@@ -20,11 +20,13 @@ import './App.css';
 
 export default class App extends React.Component {
 
-	constructor(props) {
+	selectFolderHighlight = '';
 
-		super(props);
+	constructor ( props ) {
+
+		super ( props );
 	
-		this.state = {...STORE};
+		this.state = { ...STORE };
 
 	}
 
@@ -62,8 +64,18 @@ export default class App extends React.Component {
 	
 	}
 
-	render () {
+	folderToHighlight ( folderId ) {
 		
+		console.log ( folderId );
+		
+		this.selectFolderHighlight = folderId;
+
+		this.forceUpdate ();
+
+	}
+
+	render () {
+
 		return (
 
 			<div className = 'app'>
@@ -72,7 +84,7 @@ export default class App extends React.Component {
 
 				<div id = 'flex-wrapper'>
 
-					<Route key = 'sideBarRoute' path = '/' render = { ( routerProps ) => ( <Sidebar key = 'main-home' routerProps = { routerProps } state = { this.state } /> ) } />
+					<Route key = 'sideBarRoute' path = '/' render = { ( routerProps ) => ( <Sidebar key = 'main-home' routerProps = { routerProps } state = { this.state } selectFolderHighlight = { this.selectFolderHighlight }/> ) } />
 
 					<main>
 							
@@ -84,7 +96,12 @@ export default class App extends React.Component {
 
 							<Route key = 'NoteList' exact path = '/notes/:noteId' render = { ( routerProps ) => ( <NoteList key = 'NoteList' routerProps = { routerProps } state = { this.state } deleteNote = { note => this.deleteNote ( note ) } /> ) } />
 							
-							<Route key = 'addNote' exact path = '/add-note' render = { ( routerProps ) => ( <AddNote key = 'AddNote' routerProps = { routerProps } state = { this.state } addNote = { note => this.addNote ( note ) } /> ) } />
+							<Route 
+								key = 'addNote' 
+								exact path = '/add-note' 
+								render = { ( routerProps ) => ( <AddNote key = 'AddNote' routerProps = { routerProps } state = { this.state } addNote = { note => this.addNote ( note ) } folderToHighlight = { folder => this.folderToHighlight ( folder ) }/> ) }
+								tmp = { tmp => this.tmp ( tmp ) } 
+							/>
 							
 							<Route key = 'addFolder' exact path = '/add-folder' render = { ( routerProps ) => ( <AddFolder key = 'AddFolder' routerProps = { routerProps } state = { this.state } addFolder = { folder => this.addFolder ( folder ) } /> ) } />
 

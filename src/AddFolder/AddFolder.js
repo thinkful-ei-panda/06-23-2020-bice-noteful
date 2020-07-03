@@ -22,6 +22,8 @@ export default class AddFolder extends React.Component {
         
         this.props.addFolder ( formValuesArray );
 
+        this.props.routerProps.history.push ( `/folder/${ formValuesArray.id }` );
+
     }
 
     render () {

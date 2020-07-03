@@ -25,13 +25,17 @@ export default class Sidebar extends React.Component {
 		// Highlights the folder when displaying a single note.
 		if ( pathName.slice ( 0,7 ) === '/notes/' && currentFolder === filteredNoteList[0].folderId ) return 'folder active-folder';
 
+		// Highlights the folder per onChange of select within AddNote.js
+		//if ( this.props.selectFolderHighlight !== '' ) {
+		if ( pathName === '/add-note' && this.props.selectFolderHighlight === currentFolder ) return 'folder active-folder';
+
 		// Ignore all links not currently active.
 		else return 'folder';
 
 	}
 
 	render () {
-
+		
 		const folders = [...this.props.state.folders];
 		
 		return (
